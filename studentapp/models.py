@@ -8,6 +8,7 @@ try:
 except ImportError:  # old pymongo
     from pymongo.objectid import ObjectId
 
+db = get_database()
 
 @connection.register
 class UserAccount(DjangoDocument):
@@ -67,7 +68,6 @@ class Points(DjangoDocument):
 
 
 # DATABASE Variables
-db = get_database()
 user_collection = db[UserAccount.collection_name].UserAccount
 attendence_collection = db[Attendence.collection_name].Attendence
 behaviour_collection = db[Behaviour.collection_name].Behaviour
