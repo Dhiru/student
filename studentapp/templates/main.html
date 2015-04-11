@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html ng-app="mainApp">
+  <head>
+    <meta charset="utf-8">
+    <title>project</title>
+    <link href="{% static 'student/css/base.css' %}" rel="stylesheet" />
+    <script src="{% static 'angular/js/angular.min.js' %}"></script>
+    <script src="{% static 'student/js/jquery.min.js' %}"></script>
+    <script src="{% static 'student/js/main.js' %}"></script>
+    <script src="{% static 'student/js/mainService.js' %}"></script>
+
+    <script type="text/javascript">
+        var csrf = "{{ csrf_token }}";
+    </script>
+    {% block script %}{% endblock %}
+  </head>
+  <body ng-controller="StudentListController">
+    {% csrf_token %}
+    <header>
+      <div class="header">
+	<div class="left"><span>Menu</span></div>
+	<div class="left paddingleft-20"><a href="#" ng-click="showTab(true, false, false);"><span>Student List</span></a></div>
+	<div class="left paddingleft-20" ng-click="showTab(false, true, false);"><a href="#" ><span>Give Points</span></a></div>
+	<div class="left paddingleft-20" ng-click="showTab(false, false, true);"><a href="#"><span>Add New Students</span></a></div>
+
+	<div class="right"><a href="#"><span></span></a></div>
+	<div class="clear-both"></div>
+      </div>
+    </header>
+    <div class="main">
+    {% block content %} {% endblock %}
+    <div ng-include="'/static/views/MainContent.html '"></div>
+    </div>
+    <footer class="footer">
+	<div class="left">@ 2015</div>
+	<div class="right"></div>
+	<div class="clear-both"></div>
+    </footer>
+  </body>
+</html>

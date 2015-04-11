@@ -1,3 +1,4 @@
 django==1.6.5
 django-mongokit
 django-tastypie
+pymongo==2.8

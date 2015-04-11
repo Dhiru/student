@@ -1,0 +1,77 @@
+<div class="student-list" ng-if="showStudentList" ng-init="getStudents();">
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Class</th>
+      <th>Points</th>
+    </tr>
+    <tr ng-repeat="user in user_list">
+      <td><span ng-bind="user.name"></span></td>
+      <td><span ng-bind="user.age"></span></td>
+      <td><span ng-bind="user.class"></span></td>
+      <td><span ng-bind="user.points"></span></td>
+    </tr>
+  </table>
+</div>
+<div class="add-behaviour" ng-if="showAddBehaviour" ng-init="getStudentsAndBehaviours();">
+    <form name="behaviourform" action="." method="post">
+      <table>
+        <tr>
+          <td>
+        Select User:
+          </td>
+          <td>
+        <select name="student" ng-model="user.selectStudent">
+          <option value="{{user.id}}" ng-repeat="user in behaviour_user_list">{{user.name}}</option>
+        </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+        Select Behaviour:
+          </td>
+          <td>
+        <select name="behaviour" ng-model="user.selectBehaviour">
+          <option value="{{behaviour.id}}" ng-repeat="behaviour in behaviour_list">{{behaviour.name}}</option>
+        </select>
+          </td>
+        </tr>
+      </table>
+      <input type="button" value="Submit" ng-click="addBehaviour();"/>
+    </form>
+    <p ng-if="output">{{ output }}</p>
+</div>
+<div class="add-student" ng-if="showAddStudent">
+    <form name="addstudentform" method="post">
+      <table>
+        <tr>
+          <td>
+            Student Name:
+          </td>
+          <td>
+            <input type='text' name='name' ng-model="user.name"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Student Age:
+          </td>
+          <td>
+            <input type='text' name='age' ng-model="user.age"  ng-pattern="/^(\d)+$/"/>
+            <p ng-show="addstudentform.age.$error.pattern" style="color: red">Invalid Character</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Student Class:
+          </td>
+          <td>
+            <input type='text' name='class' ng-model="user.class"/>
+          </td>
+        </tr>
+      </table>
+      <input type="button" value="Submit" ng-click="addStudent();"/>
+    </form>
+    <p ng-if="output">{{ output }}</p>
+</div>
