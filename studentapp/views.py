@@ -53,10 +53,11 @@ class SetStudentPoints(View):
         result = dict()
         user = user_collection.find_one({'_id': ObjectId(student)})
         today = datetime.datetime.now()
+        start = datetime.datetime.combine(today.date(), datetime.time(0))
         if user:
             point = points_collection.find_one({'user_set._id': user._id})
             behaviour = behaviour_collection.find_one({'_id': ObjectId(behaviour)})
-            attendence = attendence_collection.find_one({'user_set._id': user._id, 'date': today})
+            attendence = attendence_collection.find_one({'user_set._id': user._id, 'date': {'$gte':start,'$lte': today}})
             if point:
                 point.points = behaviour
                 point.save()
